@@ -15,12 +15,13 @@ provider "aws" {
 }
 
 resource "aws_instance" "MyAWSResource" {
-  ami           = "ami-5e8bb23b"
+  ami           = "ami-0f65671a86f061fcd"
   instance_type = "t2.micro"
 
   tags {
     Name    = "Terraform Instance"
-    Project = "Terraform Guide"
+    Project = "Teraform Guide v2"
     Creator = "Kyle OBrien"
+    Tool    = "Terraform"
   }
 }

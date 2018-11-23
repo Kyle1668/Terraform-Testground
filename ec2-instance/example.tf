@@ -29,4 +29,5 @@ resource "aws_instance" "API_Server" {
 
 resource "aws_eip" "API_IP" {
   instance = "${aws_instance.API_Server.id}"
+  depends_on = ["aws_instance.API_Server"]
 }

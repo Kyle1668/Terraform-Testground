@@ -40,6 +40,7 @@ resource "aws_security_group" "terraform_security" {
   name        = "terraform_group"
   description = "made with terraform"
 
+  # Inbound Rules
   ingress {
     from_port   = 22
     to_port     = 22
@@ -47,6 +48,7 @@ resource "aws_security_group" "terraform_security" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # Outbound Rules
   egress {
     from_port   = 0
     to_port     = 0

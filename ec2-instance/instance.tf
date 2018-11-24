@@ -21,13 +21,40 @@ resource "aws_instance" "API_Server" {
 
   tags {
     Name    = "Terraform Instance"
-    Project = "Teraform Guide v3"
+    Project = "Teraform Guide v4"
     Creator = "Kyle OBrien"
     Tool    = "Terraform"
   }
+
+  security_groups = ["${aws_security_group.terraform_security.name}"]
+
+  depends_on = ["aws_security_group.terraform_security"]
 }
 
 resource "aws_eip" "API_IP" {
-  instance = "${aws_instance.API_Server.id}"
+  instance   = "${aws_instance.API_Server.id}"
   depends_on = ["aws_instance.API_Server"]
+}
+
+resource "aws_security_group" "terraform_security" {
+  name        = "terraform_group"
+  description = "made with terraform"
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags {
+    Name = "Terraform_Security_group"
+  }
 }
